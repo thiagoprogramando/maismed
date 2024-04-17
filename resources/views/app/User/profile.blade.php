@@ -44,10 +44,16 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-12 col-lg-12 mb-1">
+                        <div class="col-12 col-md-6 col-lg-6 mb-1">
                             <div class="form-floating">
                                 <input type="text" name="email" value="{{ Auth::user()->email }}" class="form-control" id="floatingEmail" placeholder="Email:">
                                 <label for="floatingEmail">Email:</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6 mb-1">
+                            <div class="form-floating">
+                                <input type="text" name="password" class="form-control" id="floatingSenha" placeholder="Senha:">
+                                <label for="floatingSenha">Senha:</label>
                             </div>
                         </div>
 

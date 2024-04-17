@@ -90,9 +90,6 @@
                                             <label for="floatingState">Estado:</label>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 mb-1">
-                                        <input class="form-control" type="file" name="file">
-                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -166,9 +163,6 @@
                                                                     <input type="text" name="state" class="form-control" id="floatingState" placeholder="Estado:" value="{{ $unit->state }}">
                                                                     <label for="floatingState">Estado:</label>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-12 col-md-12 col-lg-12 mb-1">
-                                                                <input class="form-control" type="file" name="file">
                                                             </div>
                                                         </div>
                                                     </div>

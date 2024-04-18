@@ -42,6 +42,16 @@ class EventController extends Controller {
         ]);
     }
 
+    public function viewEvent($id) {
+
+        $event = Schedule::find($id);
+        return view('app.Event.view', [
+            'event' => $event,
+            'users' => User::all(),
+            'units' => Unit::all()
+        ]);
+    }   
+
     public function create(Request $request) {
 
         $event = new Schedule();
@@ -54,6 +64,9 @@ class EventController extends Controller {
         $event->day     = $date->day;
         $event->month   = $date->month;
         $event->year    = $date->year;
+
+        $event->observation  = $request->observation;
+        $event->situation    = $request->situation;
         if($event->save()) {
             return redirect()->back()->with('success', 'Evento cadastrado com sucesso!');
         }
@@ -68,6 +81,8 @@ class EventController extends Controller {
             'turn'           => $request->turn,
             'id_user'        => $request->id_user,
             'id_unit'        => $request->id_unit,
+            'observation'    => $request->observation,
+            'situation'      => $request->situation,
         ];
 
         $date = Carbon::parse($request->date_schedule);
@@ -89,7 +104,7 @@ class EventController extends Controller {
         if($schedule) {
 
             $schedule->delete();
-            return redirect()->back()->with('success', 'Evento excluído com sucesso!');
+            return redirect()->route('app')->with('success', 'Evento excluído com sucesso!');
         }
 
         return redirect()->back()->with('error', 'Houve um problema, tente novamente mais tarde!');
@@ -107,6 +122,9 @@ class EventController extends Controller {
         $event->day     = $date->day;
         $event->month   = $date->month;
         $event->year    = $date->year;
+
+        $event->observation  = $request->observation;
+        $event->situation    = $request->situation;
         if($event->save()) {
             return true;
         }

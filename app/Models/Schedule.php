@@ -22,6 +22,9 @@ class Schedule extends Model {
         'month',
         'year',
         'turn',
+
+        'situation',
+        'observation'
     ];
 
     public function user() {

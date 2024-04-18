@@ -130,6 +130,24 @@
                                             <label for="floatingUnit">Unidades</label>
                                         </div>
                                     </div>
+                                    <div class="col-12 col-md-12 col-lg-12 mb-1">
+                                        <div class="form-floating">
+                                            <select name="situation" class="form-select" id="floatingUnit">
+                                                <option selected value="">Situação:</option>
+                                                <option value="Pagamento avista">Pagamento avista</option>
+                                                <option value="Pagamento parcelado">Pagamento parcelado</option>
+                                                <option value="Pendente de Pagamento">Pendente de pagamento</option>
+                                                <option value="Pendente">Pendente</option>
+                                            </select>
+                                            <label for="floatingUnit">Situação</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 mb-1">
+                                        <div class="form-floating">
+                                            <textarea name="observation" class="form-control" placeholder="Address" id="floatingObservation" style="height: 100px;"></textarea>
+                                            <label for="floatingObservation">Observações</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -178,7 +196,7 @@
                                     <div class="modal fade" id="updateModal{{ $event->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <form action="{{ route('update-event') }}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{ route('update-event') }}" method="POST">
                                                     @csrf
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Editar dados</h5>
@@ -225,6 +243,24 @@
                                                                         @endforeach
                                                                     </select>
                                                                     <label for="floatingUnit">Unidades</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-12 col-lg-12 mb-1">
+                                                                <div class="form-floating">
+                                                                    <select name="situation" class="form-select" id="floatingUnit">
+                                                                        <option selected value="{{ $event->situation }}">@if(!empty($event->situation)) {{ $event->situation }} @else Situação: @endif</option>
+                                                                        <option value="Pagamento avista">Pagamento avista</option>
+                                                                        <option value="Pagamento parcelado">Pagamento parcelado</option>
+                                                                        <option value="Pendente de Pagamento">Pendente de pagamento</option>
+                                                                        <option value="Pendente">Pendente</option>
+                                                                    </select>
+                                                                    <label for="floatingUnit">Situação</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-12 col-lg-12 mb-1">
+                                                                <div class="form-floating">
+                                                                    <textarea name="observation" class="form-control" placeholder="Address" id="floatingObservation" style="height: 100px;">{{ $event->observation }}</textarea>
+                                                                    <label for="floatingObservation">Observações</label>
                                                                 </div>
                                                             </div>
                                                         </div>

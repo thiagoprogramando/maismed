@@ -17,6 +17,9 @@ return new class extends Migration {
             $table->integer('year');
             $table->integer('turn'); // 1 -DIURNO 2 - NOTURNO
 
+            $table->longText('situation')->nullable();
+            $table->longText('observation')->nullable();
+
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_unit');
 

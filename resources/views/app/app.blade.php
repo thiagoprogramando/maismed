@@ -101,7 +101,7 @@
                 @foreach($events as $event)
                     {
                         'id'    : '{{ $event->id }}',
-                        'title' : '{{ $event->turnLabel() }} | {{ $event->user->name }}',
+                        'title' : "{{ $event->user->name }} | {{ $event->situation }}",
                         'start' : '{{ $event->date_schedule }}',
                         'color' : '{{ $event->turn == 1 ? "#A8A8A8" : "#ff6961" }}'
                     },
@@ -163,6 +163,26 @@
                                         '<label for="swal-unit">Unidades</label>' +
                                     '</div>' +
                                 '</div>' +
+
+                                '<div class="col-12 col-md-12 col-lg-12 mb-1">' +
+                                    '<div class="form-floating">' +
+                                        '<select id="swal-situation" class="form-select">' +
+                                                '<option selected value="">Situação:</option>' +
+                                                '<option value="Pagamento avista">Pagamento avista</option>' +
+                                                '<option value="Pagamento parcelado">Pagamento parcelado</option>' +
+                                                '<option value="Pendente de Pagamento">Pendente de pagamento</option>' +
+                                                '<option value="Pendente">Pendente</option>' +
+                                        '</select>' +
+                                        '<label for="swal-unit">Situação</label>' +
+                                    '</div>' +
+                                '</div>' +
+
+                                '<div class="col-12 col-md-12 col-lg-12 mb-1">' +
+                                    '<div class="form-floating">' +
+                                        '<textarea name="observation" class="form-control" placeholder="Address" id="floatingObservation" style="height: 100px;"></textarea>' +
+                                        '<label for="floatingObservation">Observações</label>' +
+                                    '</div>' +
+                                '</div>' +
                             '</div>',
                         focusConfirm: false,
                         preConfirm: () => {
@@ -203,10 +223,13 @@
                         text: 'Você tem certeza que deseja excluir este evento?',
                         icon: 'warning',
                         showCancelButton: true,
+                        showDenyButton: true,
                         confirmButtonText: 'Excluir',
                         cancelButtonText: 'Cancelar',
                         confirmButtonColor: '#008000',
                         cancelButtonColor: '#ff0000',
+                        denyButtonText: 'Editar',
+                        denyButtonColor: '#ffc107'
                     }).then((result) => {
                         if (result.isConfirmed) {
 
@@ -220,6 +243,8 @@
                                     'success'
                                 );
                             });
+                        } else if (result.isDenied) {
+                            window.open('{{ env("APP_URL") }}view-event/' + arg.event.id, '_blank');
                         }
                     });
                 },

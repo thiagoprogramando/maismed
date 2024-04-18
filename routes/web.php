@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     //Event
     Route::get('/list-event', [EventController::class, 'list'])->name('list-event');
+    Route::get('/view-event/{id}', [EventController::class, 'viewEvent'])->name('view-event');
     Route::post('create-event', [EventController::class, 'create'])->name('create-event');
     Route::post('update-event', [EventController::class, 'update'])->name('update-event');
     Route::post('delete-event', [EventController::class, 'delete'])->name('delete-event');

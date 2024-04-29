@@ -95,6 +95,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
             var calendarEl = document.getElementById('calendar');
 
             var events = [
@@ -107,7 +108,6 @@
                     },
                 @endforeach
             ];
-
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
@@ -196,11 +196,13 @@
                             }
                         }
                     }).then((result) => {
+                    
                         if (result.isConfirmed) {
 
                             const addEventPromise = createEvent(result.value);
                             addEventPromise.then(data => {
                                 calendar.addEvent({
+                                    id: data.id,
                                     title: result.value.turn == 1 ? 'Diurno | ' + result.value.name_user : 'Noturno | ' + result.value.name_user,
                                     color: result.value.turn == 1 ? '#A8A8A8' : '#ff6961',
                                     start: result.value.date_schedule,
@@ -213,8 +215,11 @@
                                     'info'
                                 );
                             });
+
                         }
+
                     });
+
                     calendar.unselect();
                 },
                 eventClick: function(arg) {

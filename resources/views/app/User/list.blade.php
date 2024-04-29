@@ -101,7 +101,8 @@
                                             <select name="type" class="form-select" id="floatingType" required>
                                                 <option selected value="2">Tipo:</option>
                                                 <option value="1">Administrador</option>
-                                                <option value="2">Comum</option>
+                                                <option value="2">Supervisor</option>
+                                                <option value="3">Médico</option>
                                             </select>
                                             <label for="floatingType">Tipo</label>
                                         </div>
@@ -128,6 +129,7 @@
                                     <th scope="col">N°</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">CPF</th>
+                                    <th scope="col">Tipo</th>
                                     <th scope="col">CRM</th>
                                     <th class="text-center" scope="col">Opções</th>
                                 </tr>
@@ -138,6 +140,7 @@
                                         <th scope="row">{{ $user->id }}</th>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->cpfcnpj }}</td>
+                                        <td>{{ $user->typeLabel() }}</td>
                                         <td>{{ $user->crm }}</td>
                                         <td class="text-center">
                                             <form action="{{ route('delete-user') }}" method="POST" class="delete">
@@ -187,7 +190,8 @@
                                                                     <select name="type" class="form-select" id="floatingType">
                                                                         <option selected value="{{ $user->type }}">Tipo:</option>
                                                                         <option value="1">Administrador</option>
-                                                                        <option value="2">Comum</option>
+                                                                        <option value="2">Supervisor</option>
+                                                                        <option value="3">Médico</option>
                                                                     </select>
                                                                     <label for="floatingType">Tipo</label>
                                                                 </div>

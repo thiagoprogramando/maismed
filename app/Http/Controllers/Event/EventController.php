@@ -126,10 +126,10 @@ class EventController extends Controller {
         $event->observation  = $request->observation;
         $event->situation    = $request->situation;
         if($event->save()) {
-            return true;
+            return response()->json(['id' => $event->id], 200);
         }
         
-        return false;
+        return response()->json(['message' => 'Erro ao cadastrar o evento'], 500);
     }
 
     public function delEvent(Request $request) {

@@ -27,7 +27,10 @@ class User extends Authenticatable {
                 return 'Administrador';
                 break;
             case 2:
-                return 'Comum';
+                return 'Supervisor';
+                break;
+            case 3:
+                return 'Médico';
                 break;
             default:
                 return 'Desconhecido';

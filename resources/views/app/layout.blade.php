@@ -87,32 +87,38 @@
         <aside id="sidebar" class="sidebar">
 
             <ul class="sidebar-nav" id="sidebar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('app') }}"> <i class="bi bi-calendar-event"></i> <span>Calendário</span> </a>
-                </li>
+                @if(Auth::user()->type == 1 || Auth::user()->type == 3)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('app') }}"> <i class="bi bi-calendar-event"></i> <span>Calendário</span> </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-shop-window"></i><span>Unidades</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        @foreach ($units_extend as $unit)
-                            <li><a href="{{ route('app') }}?id_unit={{ $unit->id }}"> <i class="bi bi-circle"></i><span>{{ $unit->name }}</span> </a></li>
-                        @endforeach
-                    </ul>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                            <i class="bi bi-shop-window"></i><span>Unidades</span><i class="bi bi-chevron-down ms-auto"></i>
+                        </a>
+                        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                            @foreach ($units_extend as $unit)
+                                <li><a href="{{ route('app') }}?id_unit={{ $unit->id }}"> <i class="bi bi-circle"></i><span>{{ $unit->name }}</span> </a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endif
 
-                <li class="nav-heading">Configurações</li>
+                @if(Auth::user()->type == 1)
+                    <li class="nav-heading">Configurações</li>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ route('list-event') }}"><i class="bi bi-bookmark-plus-fill"></i><span>Eventos</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ route('list-unit') }}"><i class="bi bi-shop-window"></i><span>Unidade</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ route('list-user') }}"><i class="bi bi-person"></i><span>Pessoas</span></a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="{{ route('list-event') }}"><i class="bi bi-bookmark-plus-fill"></i><span>Eventos</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="{{ route('list-unit') }}"><i class="bi bi-shop-window"></i><span>Unidade</span></a>
+                    </li>
+                @endif
+                @if(Auth::user()->type == 1 || Auth::user()->type == 2)
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="{{ route('list-user') }}"><i class="bi bi-person"></i><span>Usuários</span></a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
                 </li>

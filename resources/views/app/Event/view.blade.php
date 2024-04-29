@@ -63,6 +63,24 @@
                                     <label for="floatingUnit">Unidades</label>
                                 </div>
                             </div>
+                            <div class="col-12 col-md-12 col-lg-12 mb-1">
+                                <div class="form-floating">
+                                    <select name="situation" id="swal-situation" class="form-select">
+                                        <option selected value="{{ $event->situation }}"> @if(!empty($event->situation)) {{ $event->situation }} @else Situação: @endif</option>
+                                        <option value="Pagamento avista">Pagamento avista</option>
+                                        <option value="Pagamento parcelado">Pagamento parcelado</option>
+                                        <option value="Pendente de Pagamento">Pendente de pagamento</option>
+                                        <option value="Pendente">Pendente</option>
+                                    </select>
+                                    <label for="swal-situation">Situação</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-12 mb-1">
+                                <div class="form-floating">
+                                    <textarea name="observation" class="form-control" placeholder="Address" id="floatingObservation" style="height: 100px;">{{ $event->observation }}</textarea>
+                                    <label for="floatingObservation">Observações</label>
+                                </div>
+                            </div>
                             <div class="col-12 col-md-6 col-lg-6 offset-md-6 offset-lg-6 mt-2">
                                 <button type="button" id="delete" class="btn btn-danger" data-bs-dismiss="modal">Excluir</button>
                                 <button type="button" id="update" class="btn btn-success">Atualizar</button>

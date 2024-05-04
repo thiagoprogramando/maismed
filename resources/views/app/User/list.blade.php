@@ -25,7 +25,7 @@
             <div class="modal fade" id="filterModal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="{{ route('list-user') }}" method="GET">
+                        <form action="{{ route('list-user', ['type' => $type]) }}" method="GET">
                             <div class="modal-header">
                                 <h5 class="modal-title">Filtrar dados da pesquisa</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -102,7 +102,7 @@
                                                 <option selected value="2">Tipo:</option>
                                                 <option value="1">Administrador</option>
                                                 <option value="2">Supervisor</option>
-                                                <option value="3">Médico</option>
+                                                <option value="3">Colaborador</option>
                                             </select>
                                             <label for="floatingType">Tipo</label>
                                         </div>
@@ -191,7 +191,7 @@
                                                                         <option selected value="{{ $user->type }}">Tipo:</option>
                                                                         <option value="1">Administrador</option>
                                                                         <option value="2">Supervisor</option>
-                                                                        <option value="3">Médico</option>
+                                                                        <option value="3">Colaborador</option>
                                                                     </select>
                                                                     <label for="floatingType">Tipo</label>
                                                                 </div>

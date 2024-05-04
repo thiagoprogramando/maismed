@@ -67,9 +67,7 @@
                                 <div class="form-floating">
                                     <select name="situation" id="swal-situation" class="form-select">
                                         <option selected value="{{ $event->situation }}"> @if(!empty($event->situation)) {{ $event->situation }} @else Situação: @endif</option>
-                                        <option value="Pagamento avista">Pagamento avista</option>
-                                        <option value="Pagamento parcelado">Pagamento parcelado</option>
-                                        <option value="Pendente de Pagamento">Pendente de pagamento</option>
+                                        <option value="Pago">Pago</option>
                                         <option value="Pendente">Pendente</option>
                                     </select>
                                     <label for="swal-situation">Situação</label>

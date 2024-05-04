@@ -134,9 +134,7 @@
                                         <div class="form-floating">
                                             <select name="situation" class="form-select" id="floatingUnit">
                                                 <option selected value="">Situação:</option>
-                                                <option value="Pagamento avista">Pagamento avista</option>
-                                                <option value="Pagamento parcelado">Pagamento parcelado</option>
-                                                <option value="Pendente de Pagamento">Pendente de pagamento</option>
+                                                <option value="Pago">Pago</option>
                                                 <option value="Pendente">Pendente</option>
                                             </select>
                                             <label for="floatingUnit">Situação</label>
@@ -249,9 +247,7 @@
                                                                 <div class="form-floating">
                                                                     <select name="situation" class="form-select" id="floatingUnit">
                                                                         <option selected value="{{ $event->situation }}">@if(!empty($event->situation)) {{ $event->situation }} @else Situação: @endif</option>
-                                                                        <option value="Pagamento avista">Pagamento avista</option>
-                                                                        <option value="Pagamento parcelado">Pagamento parcelado</option>
-                                                                        <option value="Pendente de Pagamento">Pendente de pagamento</option>
+                                                                        <option value="Pago">Pago</option>
                                                                         <option value="Pendente">Pendente</option>
                                                                     </select>
                                                                     <label for="floatingUnit">Situação</label>

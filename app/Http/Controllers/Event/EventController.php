@@ -54,6 +54,13 @@ class EventController extends Controller {
 
     public function create(Request $request) {
 
+        $event = Schedule::where('id_user', $request->id_user)->
+                           where('date_schedule', $request->date_schedule)->
+                           where('turn', $request->turn)->count();
+        if($event > 0) {
+            return redirect()->back()->with('error', 'Já existe um evento para essa data e usuário, análise os dados!');
+        }
+
         $event = new Schedule();
         $event->date_schedule   = $request->date_schedule;
         $event->turn            = $request->turn;
@@ -111,6 +118,13 @@ class EventController extends Controller {
     }
 
     public function addEvent(Request $request) {
+
+        $event = Schedule::where('id_user', $request->id_user)->
+                           where('date_schedule', $request->date_schedule)->
+                           where('turn', $request->turn)->count();
+        if($event > 0) {
+            return response()->json(['message' => 'Já existe um evento para essa data e usuário, análise os dados!'], 500);
+        }
 
         $event = new Schedule();
         $event->date_schedule   = $request->date_schedule;

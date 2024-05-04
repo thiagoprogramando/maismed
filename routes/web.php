@@ -15,7 +15,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/app', [AppController::class, 'app'])->name('app');
 
     //User
-    Route::get('/list-user', [UserController::class, 'list'])->name('list-user');
+    Route::get('/list-user/{type}', [UserController::class, 'list'])->name('list-user');
     Route::get('/profile-user', [UserController::class, 'profile'])->name('profile-user');
     Route::get('/search', [UserController::class, 'search'])->name('search');
     Route::post('create-user', [UserController::class, 'create'])->name('create-user');

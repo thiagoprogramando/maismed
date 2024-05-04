@@ -16,7 +16,7 @@ class UserController extends Controller {
         return view('app.User.profile');
     }
     
-    public function list(Request $request) {
+    public function list(Request $request, $type) {
 
         $query = User::orderBy('name', 'desc');
 
@@ -32,8 +32,10 @@ class UserController extends Controller {
             $query->where('email', $request->email);
         }
 
+        $query->where('type', $type);
         $users = $query->get();
-        return view('app.User.list', ['users' => $users]);
+
+        return view('app.User.list', ['users' => $users, 'type' => $type]);
     }
 
     public function create(Request $request) {
@@ -79,7 +81,7 @@ class UserController extends Controller {
             $data['password'] = bcrypt($request->password);
         }
 
-        $user = User::where('id', Auth::id())->update($data);
+        $user = User::where('id', $request->id)->update($data);
         if($user) {
             return redirect()->back()->with('success', 'Dados atualizados com sucesso!');
         }

@@ -17,6 +17,8 @@ class AppController extends Controller {
             return redirect()->route('list-user')->with('success', 'Acessando como supervisor!');
         }
 
+        $unit_start = Unit::where('name', '!=', null)->first();
+
         $query = Schedule::orderBy('turn', 'desc');
 
         if(!empty($request->turn)) {
@@ -25,6 +27,8 @@ class AppController extends Controller {
 
         if(!empty($request->id_unit)) {
             $query->where('id_unit', $request->id_unit);
+        } else {
+            $query->where('id_unit', $unit_start->id);
         }
 
         if(Auth::user()->type != 1) {
@@ -37,8 +41,9 @@ class AppController extends Controller {
         
         return view('app.app', [
             'events' => $events,
-            'users'  => User::all(),
-            'units'  => Unit::all()
+            'users'  => User::where('type', 3)->get(),
+            'units'  => Unit::all(),
+            'unit_start' => $unit_start,
         ]);
     }
 }

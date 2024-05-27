@@ -31,6 +31,12 @@ class Schedule extends Model {
         return $this->belongsTo(User::class, 'id_user');
     }
 
+    protected $appends = ['user_first_name'];
+
+    public function getUserFirstNameAttribute() {
+        return $this->user->firstName();
+    }
+
     public function unit() {
         return $this->belongsTo(Unit::class, 'id_unit');
     }
@@ -45,6 +51,16 @@ class Schedule extends Model {
                 break;
             default:
                 return 'Desconhecido';
+        }
+    }
+
+    public function situationLabel() {
+        switch ($this->situation) {
+            case 'Avista':
+                return '✔';
+                break;
+            default:
+                return ' ';
         }
     }
 }

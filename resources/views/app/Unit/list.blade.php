@@ -127,7 +127,7 @@
                                                 <input type="hidden" name="id" value="{{ $unit->id }}">
                                                 <a href="{{ env('APP_URL') }}api/graph-calendar?id_unit={{ $unit->id }}" target="_blank" class="btn btn-success text-light"><i class="bi bi-calendar-check"></i></a>
                                                 <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#updateModal{{ $unit->id }}"><i class="bi bi-arrow-up-right-circle"></i></button>
-                                                <button type="submit" class="btn btn-danger text-light"><i class="bi bi-trash"></i></button>
+                                                @if(Auth::user()->type == 1) <button type="submit" class="btn btn-danger text-light"><i class="bi bi-trash"></i></button> @endif
                                             </form>
                                         </td>
                                     </tr>

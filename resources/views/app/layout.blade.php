@@ -21,6 +21,10 @@
         <link href="{{ asset('dashboard/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
         <link href="{{ asset('dashboard/css/style.css') }}" rel="stylesheet">
 
+        <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
         <script src="{{ asset('dashboard/js/sweetalert2.js') }}"></script>
     </head>
 
@@ -87,22 +91,21 @@
         <aside id="sidebar" class="sidebar">
 
             <ul class="sidebar-nav" id="sidebar-nav">
-                @if(Auth::user()->type == 1 || Auth::user()->type == 3)
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('app') }}"> <i class="bi bi-calendar-event"></i> <span>Calendário</span> </a>
-                    </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('app') }}"> <i class="bi bi-calendar-event"></i> <span>Calendário</span> </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                            <i class="bi bi-shop-window"></i><span>Unidades</span><i class="bi bi-chevron-down ms-auto"></i>
-                        </a>
-                        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                            @foreach ($units_extend as $unit)
-                                <li><a href="{{ route('app') }}?id_unit={{ $unit->id }}"> <i class="bi bi-circle"></i><span>{{ $unit->name }}</span> </a></li>
-                            @endforeach
-                        </ul>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-shop-window"></i><span>Unidades</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        @foreach ($units_extend as $unit)
+                            <li><a href="{{ route('app') }}?id_unit={{ $unit->id }}"> <i class="bi bi-circle"></i><span>{{ $unit->name }}</span> </a></li>
+                        @endforeach
+                    </ul>
+                </li>
 
                 @if(Auth::user()->type == 1)
                     <li class="nav-heading">Configurações</li>
@@ -113,19 +116,21 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="{{ route('list-unit') }}"><i class="bi bi-shop-window"></i><span>Unidade</span></a>
                     </li>
-                @endif
-                @if(Auth::user()->type == 1 || Auth::user()->type == 2)
+
                     <li class="nav-item">
                         <a class="nav-link collapsed" data-bs-target="#forms-user" data-bs-toggle="collapse" href="#">
                             <i class="bi bi-person"></i><span>Usuários</span><i class="bi bi-chevron-down ms-auto"></i>
                         </a>
                         <ul id="forms-user" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                            <li><a href="{{ route('list-user', ['type' => 1]) }}"> <i class="bi bi-circle"></i><span>Administradores</span> </a></li>
+                            @if(Auth::user()->type == 1)
+                                <li><a href="{{ route('list-user', ['type' => 1]) }}"> <i class="bi bi-circle"></i><span>Administradores</span> </a></li>
+                            @endif
                             <li><a href="{{ route('list-user', ['type' => 2]) }}"> <i class="bi bi-circle"></i><span>Supervisores</span> </a></li>
                             <li><a href="{{ route('list-user', ['type' => 3]) }}"> <i class="bi bi-circle"></i><span>Colaboradores</span> </a></li>
                         </ul>
                     </li>
                 @endif
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
                 </li>
@@ -149,8 +154,8 @@
         <script src="{{ asset('dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('dashboard/vendor/quill/quill.min.js') }}"></script>
         <script src="{{ asset('dashboard/js/main.js') }}"></script>
-        <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
         <script>
+
             @if(session('error'))
                 Swal.fire({
                     title: 'Erro!',
@@ -170,7 +175,7 @@
             @endif
 
             document.addEventListener('DOMContentLoaded', function () {
-                
+
                 const deleteForms = document.querySelectorAll('form.delete');
                 deleteForms.forEach(form => {
                     form.addEventListener('submit', function (event) {

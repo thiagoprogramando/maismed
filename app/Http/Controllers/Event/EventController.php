@@ -111,7 +111,7 @@ class EventController extends Controller {
         if($schedule) {
 
             $schedule->delete();
-            return redirect()->route('app')->with('success', 'Evento excluído com sucesso!');
+            return redirect()->back()->with('success', 'Evento excluído com sucesso!');
         }
 
         return redirect()->back()->with('error', 'Houve um problema, tente novamente mais tarde!');
@@ -149,13 +149,8 @@ class EventController extends Controller {
     public function delEvent(Request $request) {
 
         $schedule = Schedule::find($request->id);
-        if($schedule) {
-
-            if($schedule->delete()) {
-                return true;
-            }
-            
-            return false;
+        if($schedule && $schedule->delete()) {
+            return true;
         }
 
         return false;
@@ -163,26 +158,30 @@ class EventController extends Controller {
 
     public function graphCalendar(Request $request) {
         
-        $query = Schedule::orderBy('date_schedule', 'desc');
-
-        if(!empty($request->id_user)) {
+        $query = Schedule::with('user')->orderBy('date_schedule', 'desc');
+    
+        if (!empty($request->id_user)) {
             $query->where('id_user', $request->id_user);
         }
-
-        if(!empty($request->id_unit)) {
+    
+        if (!empty($request->id_unit)) {
             $query->where('id_unit', $request->id_unit);
         }
         
         $query->whereMonth('date_schedule', now()->month);
-
-        $events = $query->get();
+    
+        $events = $query->get()->map(function($event) {
+            $event->user_first_name = $event->user->firstName();
+            return $event;
+        });
+    
         $users = $events->pluck('user')->unique();
-
+    
         return view('graph.calendar', [
             'events'    => $events, 
             'users'     => $users,
             'unit'      => !empty($request->id_unit) ? Unit::find($request->id_unit) : '',
         ]);
-    }
+    }    
     
 }

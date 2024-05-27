@@ -13,13 +13,9 @@ class AppController extends Controller {
     
     public function app(Request $request) {
 
-        if(Auth::user()->type == 2) {
-            return redirect()->route('list-user')->with('success', 'Acessando como supervisor!');
-        }
-
         $unit_start = Unit::where('name', '!=', null)->first();
 
-        $query = Schedule::orderBy('turn', 'desc');
+        $query = Schedule::orderBy('turn', 'asc');
 
         if(!empty($request->turn)) {
             $query->where('turn', $request->turn);
@@ -31,7 +27,7 @@ class AppController extends Controller {
             $query->where('id_unit', $unit_start->id);
         }
 
-        if(Auth::user()->type != 1) {
+        if(Auth::user()->type == 3) {
             $query->where('id_user', Auth::user()->id);
         } elseif(!empty($request->id_user)) {
             $query->where('id_user', $request->id_user);

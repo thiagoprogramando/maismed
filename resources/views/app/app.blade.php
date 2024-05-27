@@ -13,7 +13,7 @@
         }
 
         #calendar .fc-event-title{
-            font-size: 8px;
+            font-size: 10px;
         }
     </style>
 
@@ -101,13 +101,12 @@
     <script src='{{ asset('dashboard/js/fullcalendar/dist/index.global.min.js') }}'></script>
     <script src='{{ asset('dashboard/js/fullcalendar/dist/core/locales-all.global.min.js') }}'></script>
     <script src="{{ asset('dashboard/js/calendar.js') }}"></script>
-    <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
+
         document.addEventListener('DOMContentLoaded', function() {
 
             var calendarEl = document.getElementById('calendar');
@@ -116,7 +115,7 @@
                 @foreach($events as $event)
                     {
                         'id'    : '{{ $event->id }}',
-                        'title' : "{{ $event->user->name }} | {{ $event->situation }}",
+                        'title' : "{{ $event->user->firstName() }} | {{ $event->situationLabel() }}",
                         'start' : '{{ $event->date_schedule }}',
                         'color' : '{{ $event->turn == 1 ? "#A8A8A8" : "#ff6961" }}'
                     },
@@ -132,8 +131,9 @@
                 initialDate: new Date().toISOString().slice(0, 10),
                 locale: 'pt-br',
                 navLinks: false,
-                selectable: true,
+                selectable: {{ Auth::user()->type == 3 ? 'false' : 'true' }},
                 selectMirror: true,
+                eventOrder: false,
                 select: function(arg) {
                     Swal.fire({
                         title: 'Adicionar Evento',
@@ -156,36 +156,32 @@
                                     '</div>' +
                                 '</div>' +
 
-                                '<div class="col-12 col-md-6 col-lg-6 mb-1">' +
-                                    '<div class="form-floating">' +
-                                        '<select id="swal-user" class="form-select">' +
-                                            '@foreach($users as $user)' +
-                                                '<option value="{{ $user->id }}">{{ $user->name }}</option>' +
-                                            '@endforeach' +
-                                        '</select>' +
-                                        '<label for="swal-user">Usuário</label>' +
-                                    '</div>' +
+                                '<div class="col-12 col-md-12 col-lg-12 mb-2">' +
+                                    '<select id="swal-user" placeholder="Colaborador(a)">' +
+                                        '<option value="" selected>Colaborador(a)</option>' +
+                                        '@foreach($users as $user)' +
+                                            '<option value="{{ $user->id }}">{{ $user->firstName() }}</option>' +
+                                        '@endforeach' +
+                                    '</select>' +
                                 '</div>' +
 
-                                '<div class="col-12 col-md-6 col-lg-6 mb-1">' +
-                                    '<div class="form-floating">' +
-                                        '<select id="swal-unit" class="form-select">' +
-                                            '@foreach($units as $unit)' +
-                                                '<option value="{{ $unit->id }}">{{ $unit->name }}</option>' +
-                                            '@endforeach' +
-                                        '</select>' +
-                                        '<label for="swal-unit">Unidades</label>' +
-                                    '</div>' +
+                                '<div class="col-12 col-md-12 col-lg-12 mb-2">' +
+                                    '<select id="swal-unit" placeholder="Unidade">' +
+                                        '<option value="" selected>Unidade</option>' +
+                                        '@foreach($units as $unit)' +
+                                            '<option value="{{ $unit->id }}">{{ $unit->name }}</option>' +
+                                        '@endforeach' +
+                                    '</select>' +
                                 '</div>' +
 
                                 '<div class="col-12 col-md-12 col-lg-12 mb-1">' +
                                     '<div class="form-floating">' +
                                         '<select id="swal-situation" class="form-select">' +
                                                 '<option selected value="">Situação:</option>' +
-                                                '<option value="Pago">Pago</option>' +
+                                                '<option value="Avista">Avista</option>' +
                                                 '<option value="Pendente">Pendente</option>' +
                                         '</select>' +
-                                        '<label for="swal-unit">Situação</label>' +
+                                        '<label for="swal-situation">Situação</label>' +
                                     '</div>' +
                                 '</div>' +
 
@@ -205,17 +201,16 @@
                                 id_user         : document.getElementById('swal-user').value,
                                 name_unit       : document.getElementById('swal-unit').options[document.getElementById('swal-unit').selectedIndex].text,
                                 id_unit         : document.getElementById('swal-unit').value,
+                                situation       : document.getElementById('swal-situation').options[document.getElementById('swal-situation').selectedIndex].text,
                             }
                         }
                     }).then((result) => {
-                    
                         if (result.isConfirmed) {
-
                             const addEventPromise = createEvent(result.value);
                             addEventPromise.then(data => {
                                 calendar.addEvent({
                                     id: data.id,
-                                    title: result.value.turn == 1 ? 'Diurno | ' + result.value.name_user : 'Noturno | ' + result.value.name_user,
+                                    title: result.value.situation == 'Avista' ? result.value.name_user + '| ✔'  : result.value.name_user,
                                     color: result.value.turn == 1 ? '#A8A8A8' : '#ff6961',
                                     start: result.value.date_schedule,
                                     allDay: true
@@ -227,9 +222,23 @@
                                     'info'
                                 );
                             });
-
                         }
+                    });
 
+                    new TomSelect("#swal-user",{
+                        create: false,
+                        sortField: {
+                            field: "text",
+                            direction: "asc"
+                        }
+                    });
+
+                    new TomSelect("#swal-unit",{
+                        create: false,
+                        sortField: {
+                            field: "text",
+                            direction: "asc"
+                        }
                     });
 
                     calendar.unselect();

@@ -9,22 +9,17 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
         <style>
-            td {
-                min-width: 100px;
+            body {
+                font-size: 8px;
             }
             td div {
                 margin: 0;
                 padding: 0;
-                
-                min-width: 100px;
-                width: 100%
-
                 display: block;
             }
             .day {
                 background-color: #140750;
                 color: #ffffff;
-
                 text-align: center;
                 font-size: 10px;
             }
@@ -32,21 +27,17 @@
             .diurno {
                 background-color: #A8A8A8;
                 color: #ffffff;
-
-                font-size: 8px;
+                font-size: 10px;
             }
 
             .nortuno {
                 background-color: #ff6961;
                 color: #ffffff;
-
-                font-size: 8px;
+                font-size: 10px;
             }
 
             .event {
-
                 border-bottom: 1px solid #DEE2E6;
-
                 width: 100%;
             }
             .table-user {
@@ -67,7 +58,7 @@
                     @endif 
                 </p>                
             </div>
-            <div class="col-12 mb-2">
+            <div class="col-8 mb-2">
                 <table class="table table-bordered">
                     <thead>
                         <tr class="text-center">
@@ -84,17 +75,7 @@
                 </table>
             </div>
 
-            <div class="col-12">
-                
-                <table class="table table-bordered mb-2">
-                    <tbody>
-                        <tr>
-                            <td style="background-color: #A8A8A8; color: #ffffff;">DIURNO</td>
-                            <td style="background-color: #ff6961; color: #ffffff;">NORTUNO</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
+            <div class="col-4">
                 <table class="table table-bordered table-user">
                     <thead>
                         <tr class="text-center">
@@ -112,20 +93,30 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="col-12">
+                <table class="table table-bordered mb-2">
+                    <tbody>
+                        <tr>
+                            <td style="background-color: #A8A8A8; color: #ffffff;">DIURNO</td>
+                            <td style="background-color: #ff6961; color: #ffffff;">NORTUNO</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
         <script>
-
             const currentDate = new Date();
             const currentMonth = currentDate.getMonth();
             const currentYear = currentDate.getFullYear();
             const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-            const precedingDays = firstDayOfMonth.getDay() - 1;
+            const precedingDays = (firstDayOfMonth.getDay() + 6) % 7;
             const numRows = Math.ceil((precedingDays + daysInMonth) / 7);
-
+        
             let calendarHTML = '';
             for (let i = 0; i < numRows; i++) {
                 calendarHTML += '<tr>';
@@ -139,32 +130,31 @@
                 }
                 calendarHTML += '</tr>';
             }
-
+        
             $('#calendar-body').html(calendarHTML);
-
+        
             const events = @json($events);
             events.forEach(event => {
                 const eventDate = new Date(event.date_schedule);
-                eventDate.setDate(eventDate.getDate() + 1);
                 const eventDay = eventDate.getDate();
                 const eventMonth = eventDate.getMonth();
                 const eventYear = eventDate.getFullYear();
-
+        
                 if (eventMonth === currentMonth && eventYear === currentYear) {
-                    const dayIndex = eventDay - 1 - precedingDays;
+                    const dayIndex = eventDay + precedingDays;
                     const dayElement = $('#calendar-body tr').eq(Math.floor(dayIndex / 7)).find('td').eq(dayIndex % 7);
-                    dayElement.append(`<div class="event ${event.turn === 1 ? 'diurno' : 'nortuno'}"> <div class="event"> ${event.user.name} </div> </div>`);
+                    dayElement.append(`<div class="event ${event.turn == 1 ? 'diurno' : 'nortuno'}"> <div class="event"> ${event.user_first_name} </div> </div>`);
                 }
             });
-
+        
             // Gere o PDF da página
             html2pdf(document.body, {
-                margin: 1,
+                margin: 0.3,
                 filename: 'calendario.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'cm', format: 'letter', orientation: 'landscape' }
             });
-        </script>
+        </script>        
     </body>
 </html>

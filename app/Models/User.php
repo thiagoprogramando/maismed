@@ -37,6 +37,16 @@ class User extends Authenticatable {
         }
     }
 
+    public function firstName() {
+        $names = explode(' ', $this->name);
+
+        if (count($names) >= 2) {
+            return $names[0] . ' ' . $names[1];
+        }
+
+        return $names[0];
+    }
+
     protected $hidden = [
         'password',
         'remember_token',

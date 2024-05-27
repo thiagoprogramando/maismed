@@ -114,4 +114,5 @@ class UserController extends Controller {
             'users'     => $users
         ]);
     }
+
 }

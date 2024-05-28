@@ -13,10 +13,10 @@ return new class extends Migration {
             $table->string('crm')->nullable();
             $table->string('cpfcnpj')->nullable();
 
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('password');
 
-            $table->integer('type'); // 1 - Master 2 - Comum
+            $table->integer('type'); // 1 - Master 2 - Supervisor 3 - Colaborador
 
             $table->timestamps();
         });

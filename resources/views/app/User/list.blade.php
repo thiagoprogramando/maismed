@@ -169,7 +169,7 @@
                                                             
                                                             <div class="col-12 col-md-12 col-lg-12 mb-1">
                                                                 <div class="form-floating">
-                                                                    <input type="text" name="name" class="form-control" id="floatingName" placeholder="Nome:" value="{{ $user->name }}">
+                                                                    <input type="text" name="name" class="form-control" id="floatingName" placeholder="Nome:" value="{{ $user->name }}" required>
                                                                     <label for="floatingName">Nome:</label>
                                                                 </div>
                                                             </div>

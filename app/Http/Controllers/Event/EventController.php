@@ -37,7 +37,7 @@ class EventController extends Controller {
         $events = $query->get();
         return view('app.Event.list', [
             'events' => $events,
-            'users'  => User::all(),
+            'users'  => User::where('type', 3)->get(),
             'units'  => Unit::all()
         ]);
     }

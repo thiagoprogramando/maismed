@@ -99,7 +99,7 @@
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="type" class="form-select" id="floatingType" required>
-                                                <option selected value="2">Tipo:</option>
+                                                <option selected value="3">Tipo:</option>
                                                 <option value="1">Administrador</option>
                                                 <option value="2">Supervisor</option>
                                                 <option value="3">Colaborador</option>

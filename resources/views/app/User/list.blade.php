@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
-                                            <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="Email:" required>
+                                            <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="Email:">
                                             <label for="floatingEmail">Email:</label>
                                         </div>
                                     </div>

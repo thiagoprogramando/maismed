@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-12 mb-3 text-center">
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle p-2 w-25" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $unit_start->name }}</button>
+                    <button class="btn btn-primary dropdown-toggle p-2 w-25" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@if($unit_start) {{ $unit_start->name }} @else Sem Unidade @endif</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         @foreach ($units_extend as $unit)
                             <a class="dropdown-item" href="{{ route('app') }}?id_unit={{ $unit->id }}">{{ $unit->name }}</a>

@@ -66,7 +66,7 @@
                             <th scope="col">TERÇA</th>
                             <th scope="col">QUARTA</th>
                             <th scope="col">QUINTA</th>
-                            <th scope="col">SEXA</th>
+                            <th scope="col">SEXTA</th>
                             <th scope="col">SÁBADO</th>
                             <th scope="col">DOMINGO</th>
                         </tr>
@@ -99,7 +99,7 @@
                     <tbody>
                         <tr>
                             <td style="background-color: #A8A8A8; color: #ffffff;">DIURNO</td>
-                            <td style="background-color: #ff6961; color: #ffffff;">NORTUNO</td>
+                            <td style="background-color: #ff6961; color: #ffffff;">NOTURNO</td>
                         </tr>
                     </tbody>
                 </table>

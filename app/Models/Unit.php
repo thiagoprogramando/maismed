@@ -12,8 +12,8 @@ class Unit extends Model {
     protected $table = 'unit';
 
     protected $fillable = [
-        'state',
-        'city',
         'name',
+        'city',
+        'state',
     ];
 }

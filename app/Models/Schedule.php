@@ -56,7 +56,7 @@ class Schedule extends Model {
 
     public function situationLabel() {
         switch ($this->situation) {
-            case 'Avista':
+            case 1:
                 return '✔';
                 break;
             default:

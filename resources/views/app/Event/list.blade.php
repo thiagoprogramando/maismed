@@ -41,7 +41,6 @@
                                     <div class="col-12 col-md-12 col-lg-12 mb-1">
                                         <div class="form-floating">
                                             <select name="turn" class="form-select" id="floatingTurn" required>
-                                                <option selected value="1">Horário:</option>
                                                 <option value="1">Diurno</option>
                                                 <option value="2">Noturno</option>
                                             </select>
@@ -51,18 +50,16 @@
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="id_user" class="form-select" id="floatingUser" required>
-                                                <option selected value=" ">Usuário:</option>
                                                 @foreach ($users as $user)
                                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <label for="floatingUser">Usuário</label>
+                                            <label for="floatingUser">Usuários</label>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="id_unit" class="form-select" id="floatingUnit" required>
-                                                <option selected value=" ">Unidade:</option>
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                                 @endforeach
@@ -101,7 +98,6 @@
                                     <div class="col-12 col-md-12 col-lg-12 mb-1">
                                         <div class="form-floating">
                                             <select name="turn" class="form-select" id="floatingTurn" required>
-                                                <option selected value="1">Horário:</option>
                                                 <option value="1">Diurno</option>
                                                 <option value="2">Noturno</option>
                                             </select>
@@ -111,18 +107,16 @@
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="id_user" class="form-select" id="floatingUser" required>
-                                                <option selected value=" ">Usuário:</option>
                                                 @foreach ($users as $user)
                                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <label for="floatingUser">Usuário</label>
+                                            <label for="floatingUser">Usuários</label>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="id_unit" class="form-select" id="floatingUnit" required>
-                                                <option selected value=" ">Unidade:</option>
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                                 @endforeach
@@ -133,9 +127,8 @@
                                     <div class="col-12 col-md-12 col-lg-12 mb-1">
                                         <div class="form-floating">
                                             <select name="situation" class="form-select" id="floatingUnit">
-                                                <option selected value="">Situação:</option>
-                                                <option value="Avista">Avista</option>
-                                                <option value="Pendente">Pendente</option>
+                                                <option value="1">À Vista</option>
+                                                <option value="0">Pendente</option>
                                             </select>
                                             <label for="floatingUnit">Situação</label>
                                         </div>
@@ -185,8 +178,8 @@
                                             <form action="{{ route('delete-event') }}" method="POST" class="delete">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $event->id }}">
-                                                <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#updateModal{{ $event->id }}"><i class="bi bi-arrow-up-right-circle"></i></button>
-                                                <button type="submit" class="btn btn-danger text-light"><i class="bi bi-trash"></i></button>
+                                                <button title="Editar Informações" type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#updateModal{{ $event->id }}"><i class="bi bi-arrow-up-right-circle"></i></button>
+                                                <button title="Excluir Registro" type="submit" class="btn btn-danger text-light"><i class="bi bi-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -246,9 +239,9 @@
                                                             <div class="col-12 col-md-12 col-lg-12 mb-1">
                                                                 <div class="form-floating">
                                                                     <select name="situation" class="form-select" id="floatingUnit">
-                                                                        <option selected value="{{ $event->situation }}">@if(!empty($event->situation)) {{ $event->situation }} @else Situação: @endif</option>
-                                                                        <option value="Pago">Pago</option>
-                                                                        <option value="Pendente">Pendente</option>
+                                                                        <option selected value="{{ $event->situation }}"> Situação:</option>
+                                                                        <option value="1">À vista</option>
+                                                                        <option value="0">Pendente</option>
                                                                     </select>
                                                                     <label for="floatingUnit">Situação</label>
                                                                 </div>

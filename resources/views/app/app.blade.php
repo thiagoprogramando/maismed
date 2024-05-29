@@ -178,8 +178,8 @@
                                     '<div class="form-floating">' +
                                         '<select id="swal-situation" class="form-select">' +
                                                 '<option selected value="">Situação:</option>' +
-                                                '<option value="Avista">Avista</option>' +
-                                                '<option value="Pendente">Pendente</option>' +
+                                                '<option value="1">À Vista</option>' +
+                                                '<option value="0">Pendente</option>' +
                                         '</select>' +
                                         '<label for="swal-situation">Situação</label>' +
                                     '</div>' +
@@ -210,7 +210,7 @@
                             addEventPromise.then(data => {
                                 calendar.addEvent({
                                     id: data.id,
-                                    title: result.value.situation == 'Avista' ? result.value.name_user + '| ✔'  : result.value.name_user,
+                                    title: result.value.situation == 1 ? result.value.name_user + '| ✔'  : result.value.name_user,
                                     color: result.value.turn == 1 ? '#A8A8A8' : '#ff6961',
                                     start: result.value.date_schedule,
                                     allDay: true

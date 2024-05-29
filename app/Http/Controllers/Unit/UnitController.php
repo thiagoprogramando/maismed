@@ -50,14 +50,7 @@ class UnitController extends Controller {
             'state' => $request->state,
         ];
 
-        if($request->hasFile('file')) {
-            $file           = $request->file('file');
-            $fileName       = rand(0, 5689).rand(0, 99999).'.'.$file->getClientOriginalExtension();
-            $data['file']   = $file->storeAs('unit', $fileName);
-        }
-
-        $unit = Unit::where('id', $request->id)->update($data);
-        if($unit) {
+        if(Unit::where('id', $request->id)->update($data)) {
             return redirect()->back()->with('success', 'Dados atualizados com sucesso!');
         }
 
@@ -67,9 +60,7 @@ class UnitController extends Controller {
     public function delete(Request $request) {
 
         $unit = Unit::find($request->id);
-        if($unit) {
-
-            $unit->delete();
+        if($unit &&  $unit->delete()) {
             return redirect()->back()->with('success', 'Unidade excluída com sucesso!');
         }
 

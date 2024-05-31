@@ -41,6 +41,7 @@
                                     <div class="col-12 col-md-12 col-lg-12 mb-1">
                                         <div class="form-floating">
                                             <select name="turn" class="form-select" id="floatingTurn" required>
+                                                <option value="" selected>Selecione</option>
                                                 <option value="1">Diurno</option>
                                                 <option value="2">Noturno</option>
                                             </select>
@@ -50,6 +51,7 @@
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="id_user" class="form-select" id="floatingUser" required>
+                                                <option value="" selected>Selecione</option>
                                                 @foreach ($users as $user)
                                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                 @endforeach
@@ -60,6 +62,7 @@
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="id_unit" class="form-select" id="floatingUnit" required>
+                                                <option value="" selected>Selecione</option>
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                                 @endforeach
@@ -98,6 +101,7 @@
                                     <div class="col-12 col-md-12 col-lg-12 mb-1">
                                         <div class="form-floating">
                                             <select name="turn" class="form-select" id="floatingTurn" required>
+                                                <option value="" selected>Selecione</option>
                                                 <option value="1">Diurno</option>
                                                 <option value="2">Noturno</option>
                                             </select>
@@ -107,6 +111,7 @@
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="id_user" class="form-select" id="floatingUser" required>
+                                                <option value="" selected>Selecione</option>
                                                 @foreach ($users as $user)
                                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                 @endforeach
@@ -117,6 +122,7 @@
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
                                             <select name="id_unit" class="form-select" id="floatingUnit" required>
+                                                <option value="" selected>Selecione</option>
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                                 @endforeach
@@ -127,6 +133,7 @@
                                     <div class="col-12 col-md-12 col-lg-12 mb-1">
                                         <div class="form-floating">
                                             <select name="situation" class="form-select" id="floatingUnit">
+                                                <option value="" selected>Selecione</option>
                                                 <option value="1">À Vista</option>
                                                 <option value="0">Pendente</option>
                                             </select>

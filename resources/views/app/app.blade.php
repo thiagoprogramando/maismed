@@ -201,7 +201,7 @@
                                 id_user         : document.getElementById('swal-user').value,
                                 name_unit       : document.getElementById('swal-unit').options[document.getElementById('swal-unit').selectedIndex].text,
                                 id_unit         : document.getElementById('swal-unit').value,
-                                situation       : document.getElementById('swal-situation').options[document.getElementById('swal-situation').selectedIndex].text,
+                                situation   : document.getElementById('swal-situation').value,
                             }
                         }
                     }).then((result) => {

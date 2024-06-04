@@ -246,7 +246,7 @@
                                                             <div class="col-12 col-md-12 col-lg-12 mb-1">
                                                                 <div class="form-floating">
                                                                     <select name="situation" class="form-select" id="floatingUnit">
-                                                                        <option selected value="{{ $event->situation }}"> Situação:</option>
+                                                                        <option selected value="{{ $event->situation }}"> @if (!empty($event->situation) && $event->situation == 1) À vista @else Pendente @endif </option>
                                                                         <option value="1">À vista</option>
                                                                         <option value="0">Pendente</option>
                                                                     </select>

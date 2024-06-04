@@ -80,13 +80,13 @@
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
-                                            <input type="text" name="city" class="form-control" id="floatingCity" placeholder="Cidade:">
+                                            <input type="text" name="city" class="form-control" id="floatingCity" placeholder="Cidade:" required>
                                             <label for="floatingCity">Cidade:</label>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mb-1">
                                         <div class="form-floating">
-                                            <input type="text" name="state" class="form-control" id="floatingState" placeholder="Estado:">
+                                            <input type="text" name="state" class="form-control" id="floatingState" placeholder="Estado:" required>
                                             <label for="floatingState">Estado:</label>
                                         </div>
                                     </div>

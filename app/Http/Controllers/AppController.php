@@ -13,7 +13,7 @@ class AppController extends Controller {
     
     public function app(Request $request) {
 
-        $unit_start = Unit::whereNotNull('name')->first();
+        
 
         $query = Schedule::orderBy('turn', 'asc');
 
@@ -22,9 +22,11 @@ class AppController extends Controller {
         }
 
         if (!empty($request->id_unit)) {
+            $unit_start = Unit::where('id', $request->id_unit)->first();
             $query->where('id_unit', $request->id_unit);
-        } elseif ($unit_start) {
-            $query->where('id_unit', $unit_start->id);
+        } else {
+            $unit_start = Unit::whereNotNull('name')->first();
+            $unit_start != null ? $query->where('id_unit', $unit_start->id) : '';
         }
 
         if (Auth::user()->type == 3) {

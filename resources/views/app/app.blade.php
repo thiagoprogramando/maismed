@@ -348,6 +348,11 @@
                 url += 'id_unit=' + id_unit + '&';
             }
 
+            var id_unit = "{{ $unit_start->id }}";
+            if(id_unit) {
+                url += 'id_unit=' + id_unit + '&';
+            }
+
             var id_user = urlParams.get('id_user');
             if (id_user) {
                 url += 'id_user=' + id_user;

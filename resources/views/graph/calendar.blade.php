@@ -52,12 +52,17 @@
     <body>
 
         <div class="row">
-            <div class="col-12 mb-2 header text-center">
-                <p class="mt-2">
-                    @if(!empty($unit))
-                        {{ $unit->name }} - {{ $unit->city }} / {{ $unit->state }}<br>
-                    @endif 
-                </p>                
+            <div class="col-12 mb-2 header row">
+                <div class="col-sm-12 col-lg-3">
+                    <img class="w-25 ml-5 mb-2 mt-2" src="{{asset('dashboard/img/logo.png') }}">
+                </div>
+                <div class="col-sm-12 col-lg-9">
+                    <h2 class="mt-2">
+                        @if(!empty($unit))
+                            {{ $unit->name }} - {{ $unit->city }} / {{ $unit->state }}<br>
+                        @endif 
+                    </h2> 
+                </div>          
             </div>
             <div class="col-8 mb-2">
                 <table class="table table-bordered">
@@ -91,17 +96,6 @@
                                 <td class="text-center">{{ $user->crm }}</td>
                             </tr>
                         @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-12">
-                <table class="table table-bordered mb-2">
-                    <tbody>
-                        <tr>
-                            <td style="background-color: #A8A8A8; color: #ffffff;">DIURNO</td>
-                            <td style="background-color: #ff6961; color: #ffffff;">NOTURNO</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

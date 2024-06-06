@@ -206,15 +206,37 @@
                         }
                     }).then((result) => {
                         if (result.isConfirmed) {
+
+                            if(!result.value.id_unit || !result.value.id_user || !result.value.date_schedule) {
+                                Swal.fire(
+                                    'Atenção!',
+                                    'O evento não foi cadastrado: Ausência de informações!',
+                                    'info'
+                                );
+                                return;
+                            }
+
                             const addEventPromise = createEvent(result.value);
                             addEventPromise.then(data => {
-                                calendar.addEvent({
-                                    id: data.id,
-                                    title: result.value.situation == 1 ? result.value.name_user + '| ✔'  : result.value.name_user,
-                                    color: result.value.turn == 1 ? '#A8A8A8' : '#ff6961',
-                                    start: result.value.date_schedule,
-                                    allDay: true
-                                });
+                                console.log(data);
+
+                                if(data.id) {
+                                    calendar.addEvent({
+                                        id: data.id,
+                                        title: result.value.situation == 1 ? result.value.name_user + '| ✔'  : result.value.name_user,
+                                        color: result.value.turn == 1 ? '#A8A8A8' : '#ff6961',
+                                        start: result.value.date_schedule,
+                                        allDay: true
+                                    });
+
+                                    calendar.unselect();
+                                } else {
+                                    Swal.fire(
+                                        'Atenção!',
+                                        'O evento não foi cadastrado, verifique todas às informações!',
+                                        'info'
+                                    );
+                                }
                             }).catch(error => {
                                 Swal.fire(
                                     'Atenção!',
@@ -240,8 +262,6 @@
                             direction: "asc"
                         }
                     });
-
-                    calendar.unselect();
                 },
                 eventClick: function(arg) {
                     Swal.fire({

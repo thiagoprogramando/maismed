@@ -1,53 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
         <title>Calendário</title>
+
         <link href="{{ asset('dashboard/img/logo.png') }}" rel="icon">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-        <style>
-            body {
-                font-size: 8px;
-            }
-            td div {
-                margin: 0;
-                padding: 0;
-                display: block;
-            }
-            .day {
-                background-color: #140750;
-                color: #ffffff;
-                text-align: center;
-                font-size: 10px;
-            }
-
-            .diurno {
-                background-color: #A8A8A8;
-                color: #ffffff;
-                font-size: 10px;
-            }
-
-            .nortuno {
-                background-color: #ff6961;
-                color: #ffffff;
-                font-size: 10px;
-            }
-
-            .event {
-                border-bottom: 1px solid #DEE2E6;
-                width: 100%;
-            }
-            .table-user {
-                font-size: 10px;
-            }
-            .header {
-                border-bottom: 1px solid #DEE2E6;
-            }
-        </style>
+        <link href="{{ asset('dashboard/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('dashboard/css/calendar.css') }}" rel="stylesheet">
     </head>
     <body>
 
@@ -101,8 +63,8 @@
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+        <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
+        <script src="{{ asset('dashboard/js/html2pdf.bundle.min.js') }}"></script>
         <script>
             const currentDate = new Date();
             const currentMonth = currentDate.getMonth();
@@ -127,18 +89,18 @@
             }
         
             $('#calendar-body').html(calendarHTML);
-        
+
             const events = @json($events);
             events.forEach(event => {
-                const eventDate = new Date(event.date_schedule);
+                const eventDate = new Date(event.date_schedule + 'T00:00:00');
                 const eventDay = eventDate.getDate();
                 const eventMonth = eventDate.getMonth();
                 const eventYear = eventDate.getFullYear();
-        
+
                 if (eventMonth === currentMonth && eventYear === currentYear) {
-                    const dayIndex = eventDay + precedingDays;
+                    const dayIndex = eventDay + precedingDays - 1;
                     const dayElement = $('#calendar-body tr').eq(Math.floor(dayIndex / 7)).find('td').eq(dayIndex % 7);
-                    dayElement.append(`<div class="event ${event.turn == 1 ? 'diurno' : 'nortuno'}"> <div class="event"> ${event.user_first_name} </div> </div>`);
+                    dayElement.append(`<div class="event ${event.turn == 1 ? 'diurno' : 'noturno'}"> <div class="event"> ${event.user_first_name} </div> </div>`);
                 }
             });
         

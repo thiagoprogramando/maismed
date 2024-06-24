@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Acesso ao {{ env('APP_NAME') }}</title>
+        <title>Escala - {{ env('APP_NAME') }}</title>
 
         <link href="{{ asset('dashboard/img/logo.png') }}" rel="icon">
 
@@ -18,67 +18,114 @@
         <link href="{{ asset('dashboard/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
         <link href="{{ asset('dashboard/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
         <link href="{{ asset('dashboard/css/style.css') }}" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+        <script src="{{ asset('dashboard/js/sweetalert2.js') }}"></script>
     </head>
 
     <body>
-        <main>
-            <div class="container">
-                <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-                    
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+        
+        <header id="header" class="header bg-dark fixed-top d-flex align-items-center">
+            <nav class="header-nav ms-auto">
+                <ul class="d-flex align-items-center">
 
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-center py-4 mb-3">
-                                            <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                                <img src="{{ asset('dashboard/img/logo.png') }}">
-                                            </a>
-                                        </div>
+                    <li class="nav-item dropdown pe-3">
+                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                            <span class="dropdown-toggle ps-2 text-white">Opções</span>
+                        </a>
 
-                                        <form class="row g-3" action="{{ route('logon') }}" method="POST">
-                                            @csrf
-                                            <div class="col-12">
-                                                @if (session('error'))
-                                                    <div class="alert alert-danger alert-dismissible" role="alert">
-                                                        {{ session('error') }}
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="email" name="email" placeholder="Email:" class="form-control" required>
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="password" name="password" placeholder="Senha:" class="form-control" required>
-                                            </div>
-                                            <div class="col-12">
-                                                <button class="btn btn-primary w-100" type="submit">Acessar</button>
-                                            </div>
-                                            <div class="col-12 text-center">
-                                                <p class="small mb-0">V 0.0.1</p>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                            <li class="dropdown-header">
+                                <h6>Outras opções</h6>
+                                
+                            </li>
+                            <li> <hr class="dropdown-divider"> </li>
 
-                                <div class="credits">
-                                    Desenvolvido por <a href="https://ifuture.cloud/">ifuture.cloud</a>
-                                </div>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('login') }}">
+                                    <i class="bi bi-person"></i>
+                                    <span>Acesso</span>
+                                </a>
+                            </li>
+                            <li> <hr class="dropdown-divider"> </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="https://maismeds.com.br/">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>MaisMed</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
+        <main class="container mt-5">
+            <div class="row">
+
+                <div class="col-12 col-md-12 col-lg-12 text-center mt-5">
+                    <img src="{{ asset('dashboard/img/logo.png') }}" class="logo-img" alt="Logo">
+                    <hr>
+                </div>
+
+                <div class="col-12 col-md-12 col-lg-12">
+                    <form action="{{ route('graph-calendar') }}" class="row">
+                        <div class="col-4">
+                            <select id="swal-unit" name="id_unit" placeholder="Unidade">
+                                <option value="" selected>Unidade</option>
+                                @foreach($units as $unit)
+                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-6 row">
+                            <div class="col-6">
+                                <select name="month" class="form-control" placeholder="Mês">
+                                    <option value="{{ date('m') }}" selected>Mês</option>
+                                    <option value="1">janeiro</option>
+                                    <option value="2">Fevereiro</option>
+                                    <option value="3">Março</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Maio</option>
+                                    <option value="6">Junho</option>
+                                    <option value="7">Julho</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Setembro</option>
+                                    <option value="10">Outubro</option>
+                                    <option value="11">Novembro</option>
+                                    <option value="12">Dezembro</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <input type="number" name="year" class="form-control" placeholder="Ano (Ex: 2024):" required>
                             </div>
                         </div>
-                    </div>
 
-                </section>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-outline-primary">Ver Escala</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </main>
-
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <script src="{{ asset('dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('dashboard/vendor/quill/quill.min.js') }}"></script>
         <script src="{{ asset('dashboard/js/main.js') }}"></script>
+        <script>
+            new TomSelect("#swal-unit",{
+                create: false,
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                }
+            });
+        </script>
 
     </body>
 </html>

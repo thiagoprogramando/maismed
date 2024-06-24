@@ -7,7 +7,8 @@ use App\Http\Controllers\Unit\UnitController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('index');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('logon', [LoginController::class, 'logon'])->name('logon');
 
 Route::middleware(['auth'])->group(function () {

@@ -3,15 +3,24 @@
 namespace App\Http\Controllers\Access;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller {
+
+    public function index() {
+
+        $units = Unit::orderBy('name', 'asc')->get();
+
+        return view('welcome', [
+            'units' => $units
+        ]);
+    }
     
     public function login() {
 
-        return view('welcome');
+        return view('login');
     }
 
     public function logon(Request $request) {

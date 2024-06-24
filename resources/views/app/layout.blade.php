@@ -126,7 +126,7 @@
                                 <li><a href="{{ route('list-user', ['type' => 1]) }}"> <i class="bi bi-circle"></i><span>Administradores</span> </a></li>
                             @endif
                             <li><a href="{{ route('list-user', ['type' => 2]) }}"> <i class="bi bi-circle"></i><span>Supervisores</span> </a></li>
-                            <li><a href="{{ route('list-user', ['type' => 3]) }}"> <i class="bi bi-circle"></i><span>Colaboradores</span> </a></li>
+                            <li><a href="{{ route('list-user', ['type' => 3]) }}"> <i class="bi bi-circle"></i><span>Médicos</span> </a></li>
                         </ul>
                     </li>
                 @endif

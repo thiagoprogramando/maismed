@@ -167,6 +167,14 @@ class EventController extends Controller {
         if (!empty($request->id_unit)) {
             $query->where('id_unit', $request->id_unit);
         }
+
+        if (!empty($request->month)) {
+            $query->whereMonth('date_schedule', $request->month);
+        }
+
+        if (!empty($request->year)) {
+            $query->whereYear('date_schedule', $request->year);
+        }
         
         $query->whereMonth('date_schedule', now()->month);
     

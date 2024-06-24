@@ -63,6 +63,8 @@
             </div>
         </div>
 
+        <a id="pdf-download-link" style="display:none;"></a>
+
         <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
         <script src="{{ asset('dashboard/js/html2pdf.bundle.min.js') }}"></script>
         <script>
@@ -104,14 +106,33 @@
                 }
             });
         
-            // Gere o PDF da página
-            html2pdf(document.body, {
+            function openPdf(pdfBlob) {
+                const pdfUrl = URL.createObjectURL(pdfBlob);
+                const pdfLink = document.getElementById('pdf-download-link');
+                pdfLink.href = pdfUrl;
+                pdfLink.download = 'calendario.pdf';
+                pdfLink.click();
+
+                // Abrir o PDF em uma nova janela ou aba
+                window.open(pdfUrl);
+            }
+
+            html2pdf()
+            .from(document.body)
+            .set({
                 margin: 0.3,
                 filename: 'calendario.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'cm', format: 'letter', orientation: 'landscape' }
+                jsPDF: { unit: 'cm', format: 'letter', orientation: 'landscape' } // Definindo formato e orientação
+            })
+            .toPdf()
+            .get('pdf')
+            .then(function (pdf) {
+                const pdfBlob = pdf.output('blob');
+                openPdf(pdfBlob);
             });
+
         </script>        
     </body>
 </html>

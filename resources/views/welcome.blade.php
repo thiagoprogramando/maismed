@@ -66,8 +66,11 @@
         <main class="container mt-5">
             <div class="row">
 
-                <div class="col-12 col-md-12 col-lg-12 text-center mt-5">
-                    <img src="{{ asset('dashboard/img/logo.png') }}" class="logo-img" alt="Logo">
+                <div class="col-12 col-md-12 col-lg-12 mt-5">
+                    <div class="text-center">
+                        <img src="{{ asset('dashboard/img/logo.png') }}" class="logo-img" alt="Logo">
+                    </div>
+                    <p>Escala Médicas</p>
                     <hr>
                 </div>
 

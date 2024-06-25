@@ -15,13 +15,13 @@ td div {
 
 .diurno {
     background-color: #A8A8A8;
-    color: #ffffff;
+    color: #000;
     font-size: 10px;
 }
 
 .noturno {
     background-color: #ff6961 !important;
-    color: #ffffff;
+    color: #000;
     font-size: 10px;
 }
 

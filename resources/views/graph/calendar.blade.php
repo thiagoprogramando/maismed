@@ -26,7 +26,7 @@
                     </h2> 
                 </div>          
             </div>
-            <div class="col-8 mb-2">
+            <div class="col-9 mb-2">
                 <table class="table table-bordered">
                     <thead>
                         <tr class="text-center">
@@ -43,7 +43,7 @@
                 </table>
             </div>
 
-            <div class="col-4">
+            <div class="col-3">
                 <table class="table table-bordered table-user">
                     <thead>
                         <tr class="text-center">
@@ -105,12 +105,14 @@
                     dayElement.append(`<div class="event ${event.turn == 1 ? 'diurno' : 'noturno'}"> <div class="event"> ${event.user_first_name} </div> </div>`);
                 }
             });
+
+            var unitName = @json($unit->name);
         
             function openPdf(pdfBlob) {
                 const pdfUrl = URL.createObjectURL(pdfBlob);
                 const pdfLink = document.getElementById('pdf-download-link');
                 pdfLink.href = pdfUrl;
-                pdfLink.download = 'calendario.pdf';
+                pdfLink.download = unitName + '.pdf';
                 pdfLink.click();
 
                 // Abrir o PDF em uma nova janela ou aba
@@ -121,7 +123,7 @@
             .from(document.body)
             .set({
                 margin: 0.3,
-                filename: 'calendario.pdf',
+                filename: unitName + '.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'cm', format: 'letter', orientation: 'landscape' } // Definindo formato e orientação

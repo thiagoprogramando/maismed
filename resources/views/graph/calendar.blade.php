@@ -68,9 +68,12 @@
         <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
         <script src="{{ asset('dashboard/js/html2pdf.bundle.min.js') }}"></script>
         <script>
+            // Supondo que a variável Blade month seja passada como uma variável JavaScript
+            const bladeMonth = @json($month); // Ex: 7 para agosto
+        
             const currentDate = new Date();
-            const currentMonth = currentDate.getMonth();
             const currentYear = currentDate.getFullYear();
+            const currentMonth = bladeMonth - 1; // Ajusta para o índice do mês (0-11)
             const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
             const precedingDays = (firstDayOfMonth.getDay() + 6) % 7;
@@ -91,21 +94,21 @@
             }
         
             $('#calendar-body').html(calendarHTML);
-
+        
             const events = @json($events);
             events.forEach(event => {
                 const eventDate = new Date(event.date_schedule + 'T00:00:00');
                 const eventDay = eventDate.getDate();
                 const eventMonth = eventDate.getMonth();
                 const eventYear = eventDate.getFullYear();
-
+        
                 if (eventMonth === currentMonth && eventYear === currentYear) {
                     const dayIndex = eventDay + precedingDays - 1;
                     const dayElement = $('#calendar-body tr').eq(Math.floor(dayIndex / 7)).find('td').eq(dayIndex % 7);
                     dayElement.append(`<div class="event ${event.turn == 1 ? 'diurno' : 'noturno'}"> <div class="event"> ${event.user_first_name} </div> </div>`);
                 }
             });
-
+        
             var unitName = @json($unit->name);
         
             function openPdf(pdfBlob) {
@@ -114,11 +117,11 @@
                 pdfLink.href = pdfUrl;
                 pdfLink.download = unitName + '.pdf';
                 pdfLink.click();
-
+        
                 // Abrir o PDF em uma nova janela ou aba
                 window.open(pdfUrl);
             }
-
+        
             html2pdf()
             .from(document.body)
             .set({
@@ -134,7 +137,6 @@
                 const pdfBlob = pdf.output('blob');
                 openPdf(pdfBlob);
             });
-
-        </script>        
+        </script>               
     </body>
 </html>

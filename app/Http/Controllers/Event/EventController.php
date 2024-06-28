@@ -169,14 +169,16 @@ class EventController extends Controller {
         }
 
         if (!empty($request->month)) {
-            $query->whereMonth('date_schedule', $request->month);
+            $query->where('month', $request->month);
+        } else {
+            $query->where('month', now()->month);
         }
 
         if (!empty($request->year)) {
-            $query->whereYear('date_schedule', $request->year);
+            $query->where('year', $request->year);
+        } else {
+            $query->where('year', now()->year);
         }
-        
-        $query->whereMonth('date_schedule', now()->month);
     
         $events = $query->get()->map(function($event) {
             $event->user_first_name = $event->user->firstName();
@@ -188,6 +190,7 @@ class EventController extends Controller {
         return view('graph.calendar', [
             'events'    => $events, 
             'users'     => $users,
+            'month'     => $request->month ?: now()->month,
             'unit'      => !empty($request->id_unit) ? Unit::find($request->id_unit) : '',
         ]);
     }    

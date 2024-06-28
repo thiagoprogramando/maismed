@@ -34,7 +34,7 @@ class EventController extends Controller {
             $query->where('id_unit', $request->id_unit);
         }
 
-        $events = $query->get();
+        $events = $query->orderBy('date_schedule', 'asc')->paginate(30);
         return view('app.Event.list', [
             'events' => $events,
             'users'  => User::where('type', 3)->get(),

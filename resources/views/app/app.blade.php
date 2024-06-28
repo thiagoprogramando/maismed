@@ -177,9 +177,8 @@
                                 '<div class="col-12 col-md-12 col-lg-12 mb-1">' +
                                     '<div class="form-floating">' +
                                         '<select id="swal-situation" class="form-select">' +
-                                                '<option selected value="">Situação:</option>' +
                                                 '<option value="1">À Vista</option>' +
-                                                '<option value="0">Pendente</option>' +
+                                                '<option value="0" selected>Pendente</option>' +
                                         '</select>' +
                                         '<label for="swal-situation">Situação</label>' +
                                     '</div>' +

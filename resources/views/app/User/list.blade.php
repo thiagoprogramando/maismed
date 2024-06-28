@@ -134,9 +134,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($users as $key => $user)
                                     <tr>
-                                        <th scope="row">{{ $user->id }}</th>
+                                        <th scope="row">{{ $key }}</th>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->cpfcnpj }}</td>
                                         <td>{{ $user->typeLabel() }}</td>
@@ -208,6 +208,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $users->links() }}
                     </div>
 
                 </div>

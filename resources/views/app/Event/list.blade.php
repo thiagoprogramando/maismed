@@ -133,9 +133,8 @@
                                     <div class="col-12 col-md-12 col-lg-12 mb-1">
                                         <div class="form-floating">
                                             <select name="situation" class="form-select" id="floatingUnit">
-                                                <option value="" selected>Selecione</option>
                                                 <option value="1">À Vista</option>
-                                                <option value="0">Pendente</option>
+                                                <option value="0" selected>Pendente</option>
                                             </select>
                                             <label for="floatingUnit">Situação</label>
                                         </div>
@@ -174,9 +173,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($events as $event)
+                                @foreach ($events as $key => $event)
                                     <tr>
-                                        <th scope="row">{{ $event->id }}</th>
+                                        <th scope="row">{{ $key }}</th>
                                         <td>{{ \Carbon\Carbon::parse($event->date_schedule)->format('d/m/Y') }}</td>
                                         <td>{{ $event->turnLabel() }}</td>
                                         <td>{{ $event->user->name }}</td>
@@ -272,6 +271,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $events->links() }}
                     </div>
 
                 </div>

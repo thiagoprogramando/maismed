@@ -32,7 +32,7 @@
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-center py-4 mb-3">
-                                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                            <a href="./" class="logo d-flex align-items-center w-auto">
                                                 <img src="{{ asset('dashboard/img/logo.png') }}">
                                             </a>
                                         </div>

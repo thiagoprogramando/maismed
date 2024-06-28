@@ -33,7 +33,7 @@ class UserController extends Controller {
         }
 
         $query->where('type', $type);
-        $users = $query->get();
+        $users = $query->paginate(30);
 
         return view('app.User.list', ['users' => $users, 'type' => $type]);
     }

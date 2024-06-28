@@ -116,9 +116,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($units as $unit)
+                                @foreach ($units as $key => $unit)
                                     <tr>
-                                        <th scope="row">{{ $unit->id }}</th>
+                                        <th scope="row">{{ $key }}</th>
                                         <td>{{ $unit->name }}</td>
                                         <td>{{ $unit->city }} - {{ $unit->state }}</td>
                                         <td class="text-center">
@@ -177,6 +177,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $units->links() }}
                     </div>
 
                 </div>

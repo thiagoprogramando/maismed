@@ -24,7 +24,7 @@ class UnitController extends Controller {
             $query->where('state', 'like', '%' . $request->state . '%');
         }
 
-        $units = $query->get();
+        $units = $query->paginate(30);
         return view('app.Unit.list', ['units' => $units]);
     }
 

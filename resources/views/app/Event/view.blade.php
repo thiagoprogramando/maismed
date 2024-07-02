@@ -34,9 +34,9 @@
                             <div class="col-12 col-md-6 col-lg-6 mb-1">
                                 <div class="form-floating">
                                     <select name="turn" class="form-select" id="floatingTurn" required>
-                                        <option selected value="{{ $event->turn }}">@if(!empty($event->turn)) {{ $event->turnLabel() }} @else Horário: @endif</option>
-                                        <option value="1">Diurno</option>
-                                        <option value="2">Noturno</option>
+                                        <option value="{{ $event->turn }}">Selecione</option>
+                                        <option value="1" @if($event->turn == 1) selected @endif>Diurno</option>
+                                        <option value="2" @if($event->turn == 2) selected @endif>Noturno</option>
                                     </select>
                                     <label for="floatingTurn">Tipo</label>
                                 </div>
@@ -66,9 +66,9 @@
                             <div class="col-12 col-md-12 col-lg-12 mb-1">
                                 <div class="form-floating">
                                     <select name="situation" id="swal-situation" class="form-select">
-                                        <option selected value="{{ $event->situation }}">Situação:</option>
-                                        <option value="1">À Vista</option>
-                                        <option value="0">Pendente</option>
+                                        <option value="{{ $event->situation }}">Selecione:</option>
+                                        <option value="1" @if($event->situation == 1) selected @endif>À Vista</option>
+                                        <option value="0" @if($event->situation == 0) selected @endif>Pendente</option>
                                     </select>
                                     <label for="swal-situation">Situação</label>
                                 </div>

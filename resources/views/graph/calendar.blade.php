@@ -119,7 +119,7 @@
                 pdfLink.click();
         
                 // Abrir o PDF em uma nova janela ou aba
-                window.open(pdfUrl);
+                window.location.replace(pdfUrl);
             }
         
             html2pdf()

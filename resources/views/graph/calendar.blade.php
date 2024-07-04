@@ -108,8 +108,12 @@
                     dayElement.append(`<div class="event ${event.turn == 1 ? 'diurno' : 'noturno'}"> <div class="event"> ${event.user_first_name} </div> </div>`);
                 }
             });
-        
-            var unitName = @json($unit->name);
+            
+            @if(!empty($unit->name))
+                var unitName = @json($unit->name);
+            @else
+                var unitName = 'Escala Médica';
+            @endif
         
             function openPdf(pdfBlob) {
                 const pdfUrl = URL.createObjectURL(pdfBlob);

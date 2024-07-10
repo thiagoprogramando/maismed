@@ -19,12 +19,58 @@
                     <img class="w-25 ml-5 mb-2 mt-2" src="{{asset('dashboard/img/logo.png') }}">
                 </div>
                 <div class="col-sm-12 col-lg-9">
-                    <h2 class="mt-2">
+                    <h2 class="mt-2 text-center">
                         @if(!empty($unit))
                             {{ $unit->name }} - {{ $unit->city }} / {{ $unit->state }}<br>
                         @endif 
+                
+                        @php
+                            switch ($month) {
+                                case 1:
+                                    $monthLabel = 'Janeiro/';
+                                    break;
+                                case 2:
+                                    $monthLabel = 'Fevereiro/';
+                                    break;
+                                case 3:
+                                    $monthLabel = 'Março/';
+                                    break;
+                                case 4:
+                                    $monthLabel = 'Abril/';
+                                    break;
+                                case 5:
+                                    $monthLabel = 'Maio/';
+                                    break;
+                                case 6:
+                                    $monthLabel = 'Junho/';
+                                    break;
+                                case 7:
+                                    $monthLabel = 'Julho/';
+                                    break;
+                                case 8:
+                                    $monthLabel = 'Agosto/';
+                                    break;
+                                case 9:
+                                    $monthLabel = 'Setembro/';
+                                    break;
+                                case 10:
+                                    $monthLabel = 'Outubro/';
+                                    break;
+                                case 11:
+                                    $monthLabel = 'Novembro/';
+                                    break;
+                                case 12:
+                                    $monthLabel = 'Dezembro/';
+                                    break;
+                                default:
+                                    $monthLabel = '---';
+                                    break;
+                            }
+                        @endphp
+                        {{ $monthLabel }} {{ $year }}
                     </h2> 
-                </div>          
+                </div>
+                          
             </div>
             <div class="col-9 mb-2">
                 <table class="table table-bordered">

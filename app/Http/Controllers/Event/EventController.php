@@ -191,6 +191,7 @@ class EventController extends Controller {
             'events'    => $events, 
             'users'     => $users,
             'month'     => $request->month ?: now()->month,
+            'year'     => $request->year ?: now()->year,
             'unit'      => !empty($request->id_unit) ? Unit::find($request->id_unit) : '',
         ]);
     }    

@@ -145,7 +145,7 @@
                                             <form action="{{ route('delete-user') }}" method="POST" class="delete">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $user->id }}">
-                                                <a title="Ver Calendário" href="{{ env('APP_URL_SEM_BARRA') }}api/graph-calendar?id_user={{ $user->id }}" target="_blank" class="btn btn-success text-light"><i class="bi bi-calendar-check"></i></a>
+                                                <a title="Ver Calendário" href="{{ env('APP_URL') }}api/graph-calendar?id_user={{ $user->id }}" target="_blank" class="btn btn-success text-light"><i class="bi bi-calendar-check"></i></a>
                                                 <button title="Editar Informações" type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#updateModal{{ $user->id }}"><i class="bi bi-arrow-up-right-circle"></i></button>
                                                 <button title="Excluir Registro" type="submit" class="btn btn-danger text-light"><i class="bi bi-trash"></i></button>
                                             </form>

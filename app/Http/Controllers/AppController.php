@@ -13,8 +13,6 @@ class AppController extends Controller {
     
     public function app(Request $request) {
 
-        
-
         $query = Schedule::orderBy('turn', 'asc');
 
         if(!empty($request->turn)) {

@@ -115,7 +115,7 @@
                 @foreach($events as $event)
                     {
                         'id'    : '{{ $event->id }}',
-                        'title' : "{{ $event->user->firstName() }} | {{ $event->situationLabel() }}",
+                        'title' : "{{ $event->user ? $event->user->firstName() : 'Usuário Não encontrado' }} | {{ $event->situationLabel() }}",
                         'start' : '{{ $event->date_schedule }}',
                         'color' : '{{ $event->turn == 1 ? "#A8A8A8" : "#ff6961" }}'
                     },

@@ -34,8 +34,8 @@ class Schedule extends Model {
     protected $appends = ['user_first_name'];
 
     public function getUserFirstNameAttribute() {
-        return $this->user->firstName();
-    }
+        return $this->user ? $this->user->firstName() : '---';
+    }    
 
     public function unit() {
         return $this->belongsTo(Unit::class, 'id_unit');
